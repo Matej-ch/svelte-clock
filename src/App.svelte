@@ -1,4 +1,5 @@
 <script>
+	import Tailwindcss from './Tailwindcss.svelte';
 	import { onMount } from 'svelte';
 
 	let time = new Date();
@@ -14,8 +15,10 @@
 	})
 </script>
 
+<Tailwindcss />
+
 <main>
-	<div class='flex justify-center h-full bg-gray-300'>
+	<div class='clock-container'>
 		<svg class='clock' viewBox="0 0 100 100">
 
 			<defs>
@@ -127,15 +130,16 @@
 	</div>
 </main>
 
-<style global lang="postcss">
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
+<style>
 
 	.clock {
 		margin-top: 1rem;
 		width: 60vmin;
 		height: auto;
 		filter: url(#shadow-large);
+	}
+
+	.clock-container {
+		@apply flex justify-center h-full bg-gray-300;
 	}
 </style>
