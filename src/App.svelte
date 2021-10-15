@@ -1,5 +1,17 @@
 <script>
+	import { onMount } from 'svelte';
 
+	let time = new Date();
+
+	const zeroPadded = number => ((number >= 10) ? number.toString() : `0${number}`);
+
+	$: hours = time.getHours();
+	$: minutes = time.getMinutes();
+	$: seconds = time.getSeconds();
+
+	onMount(() => {
+
+	})
 </script>
 
 <main>
@@ -56,12 +68,17 @@
 				filter="url(#shadow-large)">
 			</circle>
 
+			<!-- text elements, positioned from the center around the clock -->
 			<g
 				class="clock--face text-white"
 				font-size="8px"
 				transform="translate(50 50)"
 				text-anchor="middle"
 				dominant-baseline="middle">
+
+				{#each Array.from({length: 12}, (_, i) => i + 1) as hour}
+					<text fill="white" stroke-width="0.2" stroke="black" style="font-weight: bold" transform="rotate({-90 + 30 * (hour)}) translate(34 0) rotate({90 - 30 * (hour)})" > {zeroPadded(hour)}</text>
+				{/each}
 
 			</g>
 
