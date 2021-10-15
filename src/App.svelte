@@ -11,7 +11,13 @@
 	$: seconds = time.getSeconds();
 
 	onMount(() => {
+		const interval = setInterval(() => {
+			time = new Date();
+		}, 1000);
 
+		return () => {
+			clearInterval(interval);
+		};
 	})
 </script>
 
@@ -39,7 +45,7 @@
 
 				<mask id="mask">
 					<g transform="translate(50 50)">
-						<g class="hours" transform='rotate({-15 + 2 * 30})'>
+						<g class="hours" transform='rotate({-15 + hours * 30})'>
 							<circle
 								cx="0"
 								cy="0"
@@ -102,7 +108,7 @@
 			</circle>
 
 			<g class="hands" transform="translate(50 50)">
-				<g class="minutes" transform='rotate({4 * 6})'>
+				<g class="minutes" transform='rotate({6 * minutes})'>
 					<path fill="#fff" d="M -0.4 8 h 0.8 v -33 h -0.8 z"  filter="url(#shadow-minutes)">
 					</path>
 					<circle
@@ -113,7 +119,7 @@
 					</circle>
 				</g>
 
-				<g class="seconds" transform=rotate({30 * 6})>
+				<g class="seconds" transform=rotate({6 * seconds})>
 					<path fill="#ff3e00" d="M -0.4 10 h 0.8 v -45 h -0.8 z"  filter="url(#shadow-seconds)">
 					</path>
 					<circle
@@ -140,6 +146,6 @@
 	}
 
 	.clock-container {
-		@apply flex justify-center h-full bg-gray-300;
+		@apply flex justify-center h-full;
 	}
 </style>
